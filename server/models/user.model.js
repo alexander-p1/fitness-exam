@@ -27,17 +27,10 @@ const userSchema = new mongoose.Schema(
 );
 
 // Checkar om lösen ändrats innan användaren sparas i databasen
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    return next();
-  }
-  try {
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    next(error);
-  }
 });
 
 userSchema.methods.comparePassword = async function (inputPassword) {

@@ -2,6 +2,7 @@ import { connectDB } from "./config/db.js";
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import authRoutes from "./routes/auth.route.js"
 
 const app = express();
 connectDB();
@@ -10,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 /* Framtida routes */
-// app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 // app.use("/api/workouts", workoutRoutes);
 // app.use("/api/exercises", exercisesRoutes);
 
