@@ -30,7 +30,7 @@ export const login = async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.json(400).json({ message: "Fel email" });
+    if (!user) return res.status(400).json({ message: "Fel email" });
 
     const isMatch = await user.comparePassword(password);
     if (!isMatch) return res.status(401).json({ message: "Fel lösenord" });

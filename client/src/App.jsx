@@ -1,14 +1,14 @@
 import "./App.css";
-import { Routes, Route } from "react-router";
-import Login from "./pages/login/Login";
-import Register from "./pages/registration/Registration";
+import { Routes, Route, Navigate } from "react-router";
+import { Login } from "./pages/login/Login";
+import { Register } from "./pages/registration/Registration";
 
 function App() {
   return (
     <Routes>
-      <Route path="/login" element=<Login /> />
-      <Route path="/register" element=<Register /> />
-      <Route path="/" element />
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }

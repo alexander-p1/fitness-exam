@@ -1,35 +1,38 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router"
-import { useAuth } from '../context/AuthContext'
-import api from '../api/axios'
+import { useNavigate, Link } from "react-router";
+import { useAuth } from "../../context/AuthContext.jsx";
+import apiFetch from "../../api/api.js";
 
 export const Login = () => {
-const [formData, setFormData] = useState ({ email: "", password: "" })
-const [error, setError] = useState(null)
-const [loading, setLoading] = useState (false)
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-const { login } = useAuth();
-const navigate = useNavigate();
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-const handleChange = (e) => {
-  setFormData({ ...formData, [e.target.name]: e.target.value })
-}
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-const handleSubmit = async (e) => {
-  e.preventDefault()
-  setError(null)
-  setLoading(true)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
 
-  try {
-    const { data } = await api.post("/auth/login", formData)
-    login(data.user, data.token)
-    navigate("/dashboard")
-  } catch (err) {
-    setError(err.response?.data?.message || "Något gick fel")
-  } finally {
-    setLoading(false)
-  }
-}
+    try {
+      const data = await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+      login(data.user, data.token);
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.response?.data?.message || "Något gick fel");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -41,7 +44,7 @@ const handleSubmit = async (e) => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -56,6 +59,8 @@ const handleSubmit = async (e) => {
                   type="email"
                   required
                   autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
@@ -70,12 +75,12 @@ const handleSubmit = async (e) => {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="font-semibold text-indigo-400 hover:text-indigo-300"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">
@@ -85,6 +90,8 @@ const handleSubmit = async (e) => {
                   type="password"
                   required
                   autoComplete="current-password"
+                  value={formData.password}
+                  onChange={handleChange}
                   className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
@@ -102,15 +109,15 @@ const handleSubmit = async (e) => {
 
           <p className="mt-10 text-center text-sm/6 text-gray-400">
             Skapa ett konto{" "}
-            <a
-              href="/register"
+            <Link
+              to="/register"
               className="font-semibold text-indigo-400 hover:text-indigo-300"
             >
               här
-            </a>
+            </Link>
           </p>
         </div>
       </div>
     </>
   );
-}
+};

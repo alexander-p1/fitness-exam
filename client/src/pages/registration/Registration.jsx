@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
-// import { useAuth } from '../context/AuthContext'
-// import api from '../api/axios'
+import { useAuth } from "../../context/AuthContext.jsx";
+import apiFetch from "../../api/api.js";
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,22 +16,30 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData = { ...formData, [e.target.name]: e.target.value };
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
 
+    if (formData.password !== formData.confirmPassword) {
+      setError("Lösenord matchar inte");
+      return;
+    }
+
+    setLoading(true);
     try {
-      const { data } = await api.post("/auth/register", formData);
-      login(data.user, data.token)
-      navigate("/login")
+      const data = await apiFetch("/auth/register", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+      login(data.user, data.token);
+      navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.message || "Något gick fel")
+      setError(err.response?.data?.message || "Något gick fel");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -45,7 +53,7 @@ export const Register = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
                 // Email
@@ -56,11 +64,12 @@ export const Register = () => {
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
+                  id="name"
+                  name="name"
+                  type="text"
                   required
-                  autoComplete="email"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
@@ -69,7 +78,7 @@ export const Register = () => {
             <div>
               <label
                 // Namn
-                htmlFor="email"
+                htmlFor="name"
                 className="block text-sm/6 font-medium text-gray-100"
               >
                 Email address
@@ -81,6 +90,8 @@ export const Register = () => {
                   type="email"
                   required
                   autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
@@ -103,6 +114,8 @@ export const Register = () => {
                   type="password"
                   required
                   autoComplete="current-password"
+                  value={formData.password}
+                  onChange={handleChange}
                   className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
@@ -120,11 +133,12 @@ export const Register = () => {
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   type="password"
                   required
-                  autoComplete="current-password"
+                  value={formData.confirmPassword || ""}
+                  onChange={handleChange}
                   className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
@@ -142,12 +156,12 @@ export const Register = () => {
 
           <p className="mt-10 text-center text-sm/6 text-gray-400">
             Skapa ett konto{" "}
-            <a
-              href="/register"
+            <Link
+              to="/register"
               className="font-semibold text-indigo-400 hover:text-indigo-300"
             >
               här
-            </a>
+            </Link>
           </p>
         </div>
       </div>
