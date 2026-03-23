@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
 import apiFetch from "../../api/api.js";
 
@@ -39,7 +39,7 @@ export const Login = () => {
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
-            Sign in to your account
+            Logga in på ditt konto
           </h2>
         </div>
 
@@ -72,14 +72,14 @@ export const Login = () => {
                   htmlFor="password"
                   className="block text-sm/6 font-medium text-gray-100"
                 >
-                  Password
+                  Lösenord
                 </label>
                 <div className="text-sm">
                   <Link
                     to="#"
                     className="font-semibold text-indigo-400 hover:text-indigo-300"
                   >
-                    Forgot password?
+                    Glömt lösenord?
                   </Link>
                 </div>
               </div>
@@ -102,18 +102,18 @@ export const Login = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
-                Sign in
+                Logga in
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm/6 text-gray-400">
-            Skapa ett konto{" "}
+            Skapa ett {""}
             <Link
               to="/register"
               className="font-semibold text-indigo-400 hover:text-indigo-300"
             >
-              här
+              konto
             </Link>
           </p>
         </div>
