@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import exerciseModel from "../models/exerciseModel.js";
+import Exercise from "../models/Exercise.js";
 import "dotenv/config";
 
 const exercises = [
@@ -81,8 +81,8 @@ const exercises = [
 const seed = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    await exerciseModel.deleteMany();
-    await exerciseModel.insertMany(exercises);
+    await Exercise.deleteMany();
+    await Exercise.insertMany(exercises);
     console.log(`${exercises.length} övningar seedade.`);
     process.exit(0);
   } catch (error) {

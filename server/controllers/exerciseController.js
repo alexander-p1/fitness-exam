@@ -1,4 +1,4 @@
-import exerciseModel from "../models/Exercise.js";
+import Exercise from "../models/Exercise.js";
 
 export const getExercises = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ export const getExercises = async (req, res) => {
     if (category) filter.category = category;
     if (search) filter.name = { $regex: search, $options: "i" };
 
-    const exercises = await exerciseModel.find(filter).sort({ name: 1 });
+    const exercises = await Exercise.find(filter).sort({ name: 1 });
     res.json(exercises);
   } catch (error) {
     res.status(500).json({ message: "Serverfel", error: error.message });
