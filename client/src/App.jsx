@@ -5,6 +5,8 @@ import { Register } from "./pages/registration/Registration.jsx";
 import ProtectedRoute from "./components/PotectedRoute.jsx";
 import WorkoutBuilder from "./pages/workoutbuilder/WorkoutBuilder.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
+import WorkoutLog from "./pages/workoutlog/WorkoutLog.jsx";
+import Layout from "./components/Layout.jsx";
 
 function App() {
   return (
@@ -16,7 +18,9 @@ function App() {
         path="/workout/new"
         element={
           <ProtectedRoute>
+            <Layout>
             <WorkoutBuilder />
+            </Layout>
           </ProtectedRoute>
         }
       />
@@ -24,7 +28,19 @@ function App() {
         path="/dashboard"
         element={
           <ProtectedRoute>
+            <Layout>
             <Dashboard />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+       <Route
+        path="/workouts"
+        element={
+          <ProtectedRoute>
+            <Layout>
+            <WorkoutLog />
+            </Layout>
           </ProtectedRoute>
         }
       />

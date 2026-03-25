@@ -29,7 +29,7 @@ const Dashboard = () => {
     if (loading) return <p className="text-white p-6">Laddar..</p>
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-6">
+        <div className="p-6">
 
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Välkommen, {user?.name}! </h1>

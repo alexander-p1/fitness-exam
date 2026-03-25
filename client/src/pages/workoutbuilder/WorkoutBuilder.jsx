@@ -33,6 +33,7 @@ const WorkoutBuilder = () => {
         });
         setExercises(data);
       } catch (err) {
+        if (err.name === "AbortError") return;
         console.error(err);
       }
     };
@@ -147,7 +148,7 @@ const WorkoutBuilder = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
+    <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Nytt träningspass</h1>
 
       {error && <p className="text-red-400 mb-4">{error}</p>}
