@@ -1,7 +1,9 @@
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router";
-import { Login } from "./pages/login/Login";
-import { Register } from "./pages/registration/Registration";
+import { Login } from "./pages/login/Login.jsx";
+import { Register } from "./pages/registration/Registration.jsx";
+import ProtectedRoute from "./components/PotectedRoute.jsx";
+import WorkoutBuilder from "./pages/workoutbuilder/WorkoutBuilder.jsx";
 
 function App() {
   return (
@@ -9,6 +11,14 @@ function App() {
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route
+        path="/workout/new"
+        element={
+          <ProtectedRoute>
+            <WorkoutBuilder />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }
