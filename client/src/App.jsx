@@ -4,6 +4,7 @@ import { Login } from "./pages/login/Login.jsx";
 import { Register } from "./pages/registration/Registration.jsx";
 import ProtectedRoute from "./components/PotectedRoute.jsx";
 import WorkoutBuilder from "./pages/workoutbuilder/WorkoutBuilder.jsx";
+import Dashboard from "./pages/dashboard/Dashboard.jsx";
 
 function App() {
   return (
@@ -16,6 +17,14 @@ function App() {
         element={
           <ProtectedRoute>
             <WorkoutBuilder />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
           </ProtectedRoute>
         }
       />
