@@ -66,7 +66,7 @@ const Layout = ({ children }) => {
       {/* mobil navbar */}
       <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-gray-800 border-b border-white/10 px-4 py-3 flex justify-between items-center">
         <h1 className="text-lg font-bold">
-          Gym<span className="text-indigo-400">App</span>
+          Pides<span className="text-indigo-400">Gym</span>
         </h1>
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
