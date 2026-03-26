@@ -7,6 +7,7 @@ import WorkoutBuilder from "./pages/workoutbuilder/WorkoutBuilder.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import WorkoutLog from "./pages/workoutlog/WorkoutLog.jsx";
 import Layout from "./components/Layout.jsx";
+import Progress from "./pages/progress/Progress.jsx";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         element={
           <ProtectedRoute>
             <Layout>
-            <WorkoutBuilder />
+              <WorkoutBuilder />
             </Layout>
           </ProtectedRoute>
         }
@@ -29,17 +30,27 @@ function App() {
         element={
           <ProtectedRoute>
             <Layout>
-            <Dashboard />
+              <Dashboard />
             </Layout>
           </ProtectedRoute>
         }
       />
-       <Route
+      <Route
         path="/workouts"
         element={
           <ProtectedRoute>
             <Layout>
-            <WorkoutLog />
+              <WorkoutLog />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/progress"
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <Progress />
             </Layout>
           </ProtectedRoute>
         }
