@@ -3,10 +3,10 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import apiFetch from '../../api/api.js'
 
 const Workout = () => {
-  const { state } = useLocation() // hämta övningar från ExercisePicker
+  const { state } = useLocation() 
   const navigate = useNavigate()
 
-  // Om någon navigerar hit direkt utan övningar – skicka tillbaka
+  // Inga övningar, skicka tillbaka
   if (!state?.exercises) {
     navigate('/workout/new')
     return null
@@ -15,7 +15,6 @@ const Workout = () => {
   const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
   const [selectedExercises, setSelectedExercises] = useState(
-    // Forma om till rätt struktur med tomma sets direkt
     state.exercises.map(exercise => ({
       exercise,
       sets: [{ reps: '', weight: '' }]

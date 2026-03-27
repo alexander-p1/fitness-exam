@@ -94,12 +94,10 @@ const Progress = () => {
         </select>
       </div>
 
-      {/* Ingen övning vald */}
       {!selectedExerciseId && (
         <p className="text-gray-500">Välj en övning för att se progress.</p>
       )}
 
-      {/* Vald övning men ingen data */}
       {selectedExerciseId && chartData.length === 0 && (
         <p className="text-gray-500">
           Ingen data hittades för den här övningen.
@@ -109,7 +107,6 @@ const Progress = () => {
       {/* Grafer */}
       {chartData.length > 0 && (
         <div className="space-y-10">
-          {/* Maxvikt */}
           <div>
             <h2 className="text-lg font-semibold mb-4">Maxvikt (kg)</h2>
             <ResponsiveContainer width="100%" height={300}>
@@ -143,7 +140,6 @@ const Progress = () => {
             </ResponsiveContainer>
           </div>
 
-          {/* Reps */}
           <div>
             <h2 className="text-lg font-semibold mb-4">Reps</h2>
             <ResponsiveContainer width="100%" height={300}>

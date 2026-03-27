@@ -3,7 +3,7 @@ import Workout from "../models/Workout.js";
 export const getWorkouts = async (req, res) => {
   try {
     const workouts = await Workout.find({ user: req.user.id })
-      .populate("exercises.exercise", "name muscleGroup") // Hämtar namn och muskelgrupp från exercise
+      .populate("exercises.exercise", "name muscleGroup")
       .sort({ date: -1 });
     res.json(workouts);
   } catch (error) {
