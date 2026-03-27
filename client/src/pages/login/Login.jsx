@@ -28,7 +28,7 @@ export const Login = () => {
       login(data.user, data.token);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || "Något gick fel");
+      setError(err.message || "Något gick fel");
     } finally {
       setLoading(false);
     }
@@ -36,7 +36,7 @@ export const Login = () => {
 
   return (
     <>
-      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex bg-zinc-900 min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
             Logga in på ditt konto
@@ -44,6 +44,11 @@ export const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          {error && (
+            <div className="mb-4 bg-red-400 p-3 text-sm rounded-md text-black">
+              {error}
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
@@ -61,7 +66,7 @@ export const Login = () => {
                   autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-500 sm:text-sm/6"
                 />
               </div>
             </div>
@@ -75,12 +80,6 @@ export const Login = () => {
                   Lösenord
                 </label>
                 <div className="text-sm">
-                  <Link
-                    to="#"
-                    className="font-semibold text-indigo-400 hover:text-indigo-300"
-                  >
-                    Glömt lösenord?
-                  </Link>
                 </div>
               </div>
               <div className="mt-2">
@@ -92,7 +91,7 @@ export const Login = () => {
                   autoComplete="current-password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-500 sm:text-sm/6"
                 />
               </div>
             </div>
@@ -100,9 +99,10 @@ export const Login = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                disabled={loading}
+                className="flex w-full justify-center rounded-md bg-emerald-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:cursor-pointer hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Logga in
+                {loading ? "Loggar in..." : "Logga in"}
               </button>
             </div>
           </form>
@@ -111,7 +111,7 @@ export const Login = () => {
             Skapa ett {""}
             <Link
               to="/register"
-              className="font-semibold text-indigo-400 hover:text-indigo-300"
+              className="font-semibold text-red-400 hover:text-red-300"
             >
               konto
             </Link>

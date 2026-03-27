@@ -23,19 +23,19 @@ const Layout = ({ children }) => {
   const navLinkClass = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
       isActive
-        ? "bg-indigo-500 text-white"
-        : "text-gray-400 hover:bg-white/10 hover:text-white"
+        ? "bg-emerald-500 text-white"
+        : "bg-emerald-700 hover:bg-emerald-600 text-white"
     }`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-zinc-900 text-white">
       {/* sidebar på pc */}
-      <aside className="hidden lg:flex flex-col fixed top-0 left-0 h-full w-60 bg-gray-800 border-r border-white/10 p-4">
+      <aside className="hidden lg:flex flex-col fixed top-0 left-0 h-full w-60 bg-zinc-950 border-r border-white/10 p-4">
         <div className="mb-8 px-2">
           <h1 className="text-xl font-bold text-white">
-            Pides<span className="text-indigo-400">Gym</span>
+            Pides<span className="text-emerald-400">Gym</span>
           </h1>
-          <p className="text-xs text-gray-500 mt-0.5">Logga Pass</p>
+          <p className="text-xs text-white mt-0.5">Logga Pass</p>
         </div>
 
         {/* nav */}
@@ -50,12 +50,12 @@ const Layout = ({ children }) => {
 
         {/* user/logout */}
         <div className="border-t border-white/10 pt-4 mt-4">
-          <p className="text-sm text-gray-400 px-2 mb-3 truncate">
+          <p className="text-sm text-emerald-400 px-2 mb-3 truncate">
             {user?.name}
           </p>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:bg-white/10 hover:text-white transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-zinc-400 hover:bg-white/10 hover:text-red-400 hover:cursor-pointer transition-colors"
           >
             <span><LogOut /></span>
             <span>Logga ut</span>
@@ -64,9 +64,9 @@ const Layout = ({ children }) => {
       </aside>
 
       {/* mobil navbar */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-gray-800 border-b border-white/10 px-4 py-3 flex justify-between items-center">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-zinc-800 border-b border-white/10 px-4 py-3 flex justify-between items-center">
         <h1 className="text-lg font-bold">
-          Pides<span className="text-indigo-400">Gym</span>
+          Pides<span className="text-emerald-400">Gym</span>
         </h1>
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -78,7 +78,7 @@ const Layout = ({ children }) => {
 
       {/* dropdown mobil */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed top-14 left-0 right-0 z-40 bg-gray-800 border-b border-white/10 p-4">
+        <div className="lg:hidden fixed top-14 left-0 right-0 z-40 bg-zinc-800 border-b border-white/10 p-4">
           <nav className="flex flex-col gap-1">
             {navItems.map((item) => (
               <NavLink
@@ -93,10 +93,10 @@ const Layout = ({ children }) => {
             ))}
           </nav>
           <div className="border-t border-white/10 pt-3 mt-3">
-            <p className="text-sm text-gray-400 px-2 mb-2">{user?.name}</p>
+            <p className="text-sm text-emerald-400 px-2 mb-2">{user?.name}</p>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-gray-400 hover:bg-white/10 hover:text-white w-full transition-colors"
+              className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-gray-400 hover:bg-white/10 hover:text-white w-full transition-colors hover:cursor-pointer"
             >
               <span><LogOut /></span>
               <span>Logga ut</span>

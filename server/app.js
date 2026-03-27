@@ -1,10 +1,10 @@
-import { connectDB } from "./config/db.js";
 import "dotenv/config";
+import { connectDB } from "./config/db.js";
 import express from "express";
 import cors from "cors";
-import authRoutes from "./routes/authRoutes.js"
-import workoutRoutes from "./routes/workoutRoutes.js"
-import exercisesRoutes from "./routes/exerciseRoutes.js"
+import authRoutes from "./routes/authRoutes.js";
+import workoutRoutes from "./routes/workoutRoutes.js";
+import exercisesRoutes from "./routes/exerciseRoutes.js";
 
 const app = express();
 connectDB();
@@ -21,4 +21,6 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`))
+app.listen(PORT, () =>
+  console.log(`server is running on http://localhost:${PORT}`),
+);

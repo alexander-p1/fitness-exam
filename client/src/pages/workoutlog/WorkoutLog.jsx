@@ -71,7 +71,7 @@ const WorkoutLog = () => {
                   <div className="mt-4 space-y-4">
                     {workout.exercises.map(({ exercise, sets }, index) => (
                       <div key={index}>
-                        <p className="font-medium text-indigo-300 mb-2">
+                        <p className="font-medium text-emerald-300 mb-2">
                           {exercise.name}
                           <span className="text-gray-500 text-xs ml-2">
                             {exercise.muscleGroup}

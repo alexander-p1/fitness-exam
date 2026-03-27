@@ -23,15 +23,16 @@ const workoutExerciseSchema = new mongoose.Schema(
 const workoutSchema = new mongoose.Schema(
   {
     user: {
-      type: String,
-      required: [true, "Titel krävs"],
-      trim: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     date: {
       type: Date,
       default: Date.now,
     },
     exercises: [workoutExerciseSchema],
+    title: { type: String, required: true },
     notes: {
       type: String,
       default: "",
@@ -40,4 +41,4 @@ const workoutSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("Workout", workoutSchema)
+export default mongoose.model("Workout", workoutSchema);

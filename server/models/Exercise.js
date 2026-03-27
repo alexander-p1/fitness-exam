@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const exerciseSchema = new mongoose.Schema({
   name: {
     type: String,
-    requires: [true, "Namn krävs"],
+    required: [true, "Namn krävs"],
     trim: true,
   },
   category: {
@@ -31,4 +31,4 @@ const exerciseSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Exercise", exerciseSchema)
+export default mongoose.model("Exercise", exerciseSchema);

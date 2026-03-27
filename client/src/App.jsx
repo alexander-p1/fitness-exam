@@ -2,12 +2,13 @@ import "./App.css";
 import { Routes, Route, Navigate } from "react-router";
 import { Login } from "./pages/login/Login.jsx";
 import { Register } from "./pages/registration/Registration.jsx";
-import ProtectedRoute from "./components/PotectedRoute.jsx";
-import WorkoutBuilder from "./pages/workoutbuilder/WorkoutBuilder.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Workout from "./pages/workout/Workout.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import WorkoutLog from "./pages/workoutlog/WorkoutLog.jsx";
 import Layout from "./components/Layout.jsx";
 import Progress from "./pages/progress/Progress.jsx";
+import ExercisePicker from "./pages/exercisepicker/ExercisePicker.jsx";
 
 function App() {
   return (
@@ -16,11 +17,11 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route
-        path="/workout/new"
+        path="/workout/build"
         element={
           <ProtectedRoute>
             <Layout>
-              <WorkoutBuilder />
+              <Workout />
             </Layout>
           </ProtectedRoute>
         }
@@ -31,6 +32,16 @@ function App() {
           <ProtectedRoute>
             <Layout>
               <Dashboard />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/workout/new"
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <ExercisePicker />
             </Layout>
           </ProtectedRoute>
         }
