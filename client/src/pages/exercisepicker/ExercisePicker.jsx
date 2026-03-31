@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import apiFetch from "../../api/api.js";
+import CircularIndeterminate from "../../components/LoadingSpinner.jsx";
 
 const muscleGroups = [
   "bröst",
@@ -15,14 +16,16 @@ const muscleGroups = [
 
 const ExercisePicker = () => {
   const [exercises, setExercises] = useState([]);
-  const [selected, setSelected] = useState([]); 
+  const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
   const [muscleFilter, setMuscleFilter] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchExercises = async () => {
+      setLoading(true);
       try {
         const params = new URLSearchParams();
         if (search) params.append("search", search);
@@ -31,6 +34,8 @@ const ExercisePicker = () => {
         setExercises(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchExercises();
@@ -83,28 +88,32 @@ const ExercisePicker = () => {
 
       {/* Övningar */}
       <div className="space-y-2 mb-24">
-        {exercises.map((exercise) => {
-          const isSelected = selected.find((e) => e._id === exercise._id);
-          return (
-            <button
-              key={exercise._id}
-              onClick={() => toggleExercise(exercise)}
-              className={`w-full hover:cursor-pointer flex justify-between items-center px-4 py-3 rounded-lg transition-colors text-left ${
-                isSelected
-                  ? " border border-emerald-500"
-                  : "bg-white/5 border border-transparent hover:bg-white/10"
-              }`}
-            >
-              <div>
-                <p className="font-medium">{exercise.name}</p>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  {exercise.muscleGroup}
-                </p>
-              </div>
-              <span className="text-lg">{isSelected ? "✓" : "+"}</span>
-            </button>
-          );
-        })}
+        {loading ? (
+          <CircularIndeterminate />
+        ) : (
+          exercises.map((exercise) => {
+            const isSelected = selected.find((e) => e._id === exercise._id);
+            return (
+              <button
+                key={exercise._id}
+                onClick={() => toggleExercise(exercise)}
+                className={`w-full hover:cursor-pointer flex justify-between items-center px-4 py-3 rounded-lg transition-colors text-left ${
+                  isSelected
+                    ? " border border-emerald-500"
+                    : "bg-white/5 border border-transparent hover:bg-white/10"
+                }`}
+              >
+                <div>
+                  <p className="font-medium">{exercise.name}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">
+                    {exercise.muscleGroup}
+                  </p>
+                </div>
+                <span className="text-lg">{isSelected ? "✓" : "+"}</span>
+              </button>
+            );
+          })
+        )}
       </div>
 
       {selected.length > 0 && (

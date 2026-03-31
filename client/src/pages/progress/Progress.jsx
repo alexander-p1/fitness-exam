@@ -10,10 +10,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import apiFetch from "../../api/api.js";
+import CircularIndeterminate from "../../components/LoadingSpinner.jsx";
 
 const Progress = () => {
   const [workouts, setWorkouts] = useState([]);
-  const [selectedExerciseId, setSelectedExeciseId] = useState("");
+  const [selectedExerciseId, setSelectedExerciseId] = useState("");
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +32,7 @@ const Progress = () => {
     fetchWorkouts();
   }, []);
 
-  // lista av unika övningar från alla workouts för dropdown
+  // lista av unika övningar från alla workouts för dropdown, bara de övningar du har med i dina pass
   const uniqueExercises = workouts
     .flatMap((w) => w.exercises)
     .reduce((acc, { exercise }) => {
@@ -47,6 +48,7 @@ const Progress = () => {
       return;
     }
 
+    // kollar på varje pass och högsta vikt/reps för just den dagen
     const data = workouts
       .filter((w) =>
         w.exercises.some((e) => e.exercise._id === selectedExerciseId),
@@ -58,13 +60,14 @@ const Progress = () => {
         );
         const sets = match.sets;
 
-        const maxWeight = Math.max(...sets.map((s) => s.weight));
-        const maxReps = Math.max(...sets.map((s) => s.reps));
+        const maxWeight = Math.max(...sets.map((s) => Number(s.weight)));
+        const maxReps = Math.max(...sets.map((s) => Number(s.reps)));
 
         return {
           date: new Date(w.date).toLocaleDateString("sv-SE", {
             day: "numeric",
             month: "short",
+            year: "numeric"
           }),
           maxWeight,
           maxReps,
@@ -72,7 +75,7 @@ const Progress = () => {
       });
     setChartData(data);
   }, [selectedExerciseId, workouts]);
-  if (loading) return <p className="text-white p-6">Laddar..</p>;
+  if (loading) return <CircularIndeterminate />;
 
   return (
     <div className="p-6">
@@ -82,7 +85,7 @@ const Progress = () => {
         <label className="block text-sm text-zinc-400 mb-2">Välj övning</label>
         <select
           value={selectedExerciseId}
-          onChange={(e) => setSelectedExeciseId(e.target.value)}
+          onChange={(e) => setSelectedExerciseId(e.target.value)}
           className="bg-zinc-800 text-white rounded-lg px-4 py-2.5 outline-none border border-white/10 focus:border-zinc-500 w-full sm:w-72"
         >
           <option value="">Välj en övning</option>

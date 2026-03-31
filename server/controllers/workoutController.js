@@ -12,13 +12,14 @@ export const getWorkouts = async (req, res) => {
 };
 
 export const createWorkout = async (req, res) => {
-  const { title, exercises, notes } = req.body;
+  const { title, exercises, notes, date } = req.body;
   try {
     const workout = await Workout.create({
       user: req.user.id,
       title,
       exercises,
       notes,
+      date
     });
     res.status(201).json(workout);
   } catch (error) {

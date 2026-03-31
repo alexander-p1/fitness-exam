@@ -33,7 +33,7 @@ const Dashboard = () => {
     const workoutDate = new Date(w.date);
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-    return workoutDate >= sevenDaysAgo;
+    return workoutDate >= sevenDaysAgo; 
   }).length;
 
   const progressPercentage = Math.min(
@@ -47,7 +47,7 @@ const Dashboard = () => {
     <div className="p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold">
-          Hello there, <span className="text-red-400">{user.name}</span>!{" "}
+          Halli Hallå, <span className="text-red-400">{user.name}</span>!
         </h1>
       </div>
 

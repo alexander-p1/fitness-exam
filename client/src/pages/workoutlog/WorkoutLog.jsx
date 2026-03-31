@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import apiFetch from "../../api/api.js";
+import { ArrowBigDown, ArrowBigUp } from "lucide-react";
+import CircularIndeterminate from "../../components/LoadingSpinner.jsx";
+
 
 const WorkoutLog = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -34,7 +37,7 @@ const WorkoutLog = () => {
     }
   };
 
-  if (loading) return <p className="text-white p-6">Laddar..</p>;
+  if (loading) return <CircularIndeterminate />;
 
   return (
     <div className="p-6">
@@ -61,7 +64,7 @@ const WorkoutLog = () => {
                   </p>
                 </div>
                 <span className="text-gray-400 text-lg">
-                  {expandedId === workout._id ? "▲" : "▼"}
+                  {expandedId === workout._id ? <ArrowBigUp /> : <ArrowBigDown />}
                 </span>
               </button>
 
