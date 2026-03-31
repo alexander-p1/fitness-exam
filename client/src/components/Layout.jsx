@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
       {/* sidebar på pc */}
       <aside className="hidden lg:flex flex-col fixed top-0 left-0 h-full w-60 bg-zinc-950 border-r border-white/10 p-4">
         <div className="mb-8 px-2">
-          <h1 className="text-xl font-bold text-white">
+          <h1 className="font-['Oswald'] text-xl font-bold text-white">
             Pides<span className="text-emerald-400">Gym</span>
           </h1>
           <p className="text-xs text-white mt-0.5">Logga Pass</p>
