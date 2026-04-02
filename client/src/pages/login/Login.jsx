@@ -35,10 +35,10 @@ export const Login = () => {
   };
 
   return (
-    <>
-      <div className="flex bg-zinc-900 min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-screen items-center justify-center bg-zinc-950 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md rounded-2xl bg-zinc-900 p-8 sm:p-10 shadow-2xl border border-white/10">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
+          <h2 className="text-center text-2xl/9 font-bold tracking-tight text-white">
             Logga in på ditt konto
           </h2>
         </div>
@@ -79,8 +79,7 @@ export const Login = () => {
                 >
                   Lösenord
                 </label>
-                <div className="text-sm">
-                </div>
+                <div className="text-sm"></div>
               </div>
               <div className="mt-2">
                 <input
@@ -118,6 +117,6 @@ export const Login = () => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
