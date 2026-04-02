@@ -20,11 +20,11 @@ const Layout = ({ children }) => {
     navigate("/login");
   };
 
-  const navLinkClass = ({ isActive }) =>
-    `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+ const navLinkClass = ({ isActive }) =>
+    `flex items-center gap-3 px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 group ${
       isActive
-        ? "bg-emerald-500 text-white"
-        : "bg-emerald-700 hover:bg-emerald-600 text-white"
+        ? "bg-emerald-500/10 text-emerald-400"
+        : "text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100" 
     }`;
 
   return (

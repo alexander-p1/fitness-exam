@@ -1,17 +1,12 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import apiFetch from '../../api/api.js'
+import Timer from "../../components/Timer.jsx";
 
 const Workout = () => {
   const { state } = useLocation() 
   const navigate = useNavigate()
-
-  // Inga övningar, skicka tillbaka
-  if (!state?.exercises) {
-    navigate('/workout/new')
-    return null
-  }
-
+  
   const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
   const [selectedExercises, setSelectedExercises] = useState(
@@ -174,8 +169,10 @@ const Workout = () => {
             </button>
           </div>
         ))}
+      </div >
+      <div className='flex justify-center my-6'>
+        <Timer />
       </div>
-
       <button
         onClick={handleSave}
         disabled={loading}
